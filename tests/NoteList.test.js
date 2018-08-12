@@ -3,22 +3,8 @@ import expect from "expect";
 import { Meteor } from "meteor/meteor";
 import { mount } from "enzyme";
 
-import NoteList from "../imports/ui/NoteList";
-
-const notes = [
-  {
-    _id: "notesId1",
-    title: "Great title",
-    body: "",
-    userId: "userId1"
-  },
-  {
-    _id: "notesId1",
-    title: "Great title",
-    body: "",
-    userId: "userId1"
-  }
-];
+import { NoteList } from "../imports/ui/NoteList";
+import { notes } from "./fixtures/fixtures";
 
 if (Meteor.isClient) {
   describe("NoteList", function() {
