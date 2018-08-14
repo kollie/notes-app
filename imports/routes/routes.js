@@ -2,6 +2,7 @@ import { Meteor } from "meteor/meteor";
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
+import { Session } from "meteor/session";
 
 const history = createHistory();
 
@@ -27,8 +28,18 @@ const onEnterPrivatePage = () => {
   }
 };
 
+const onEnterNotePage = ({ match }) => {
+  if (!Meteor.userId()) {
+    browserHistory.replace("/");
+  } else {
+    Session.set("selectedNoteId", match.params.id);
+    console.log("ID", match.params.id);
+    return <Dashboard />;
+  }
+};
+
 export const onAuthChange = isAuthenticated => {
-  const pathname = history.location.pathname;
+  const pathname = browserHistory.location.pathname;
   const isUnauthenticatedPage = unauthenticatedPages.includes(pathname);
   const isAuthenticatedPage = authenticatedPages.includes(pathname);
 
@@ -67,10 +78,11 @@ export const routes = (
       />
       <Route
         path="/dashboard/:id"
-        render={() => {
-          onEnterPrivatePage();
-          return <Dashboard />;
-        }}
+        component={onEnterNotePage}
+        // render={({ match }) => {
+        //   onEnterNotePage();
+        //   return <Dashboard />;
+        // }}
       />
       <Route path="*" component={NotFound} />
     </Switch>
