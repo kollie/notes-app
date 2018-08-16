@@ -28,13 +28,12 @@ const onEnterPrivatePage = () => {
   }
 };
 
-const onEnterNotePage = ({ match }) => {
+const onEnterNotePage = match => {
   if (!Meteor.userId()) {
     browserHistory.replace("/");
   } else {
     Session.set("selectedNoteId", match.params.id);
-    console.log("ID", match.params.id);
-    return <Dashboard />;
+    console.log("ID", match.params);
   }
 };
 
@@ -58,31 +57,32 @@ export const routes = (
         exact
         path="/"
         render={() => {
-          onEnterPublicPage();
+          onEnterPublicPage;
           return <Login />;
         }}
       />
       <Route
         path="/signup"
         render={() => {
-          onEnterPublicPage();
+          onEnterPublicPage;
           return <Signup />;
         }}
       />
       <Route
-        path="/dashboard"
-        render={() => {
-          onEnterPrivatePage();
+        path="/dashboard/:id"
+        render={({ match }) => {
+          Session.set("selectedNoteId", match.params.id);
+          onEnterPrivatePage;
           return <Dashboard />;
         }}
       />
       <Route
-        path="/dashboard/:id"
-        component={onEnterNotePage}
-        // render={({ match }) => {
-        //   onEnterNotePage();
-        //   return <Dashboard />;
-        // }}
+        path="/dashboard"
+        // component={onEnterNotePage}
+        render={() => {
+          onEnterNotePage;
+          return <Dashboard />;
+        }}
       />
       <Route path="*" component={NotFound} />
     </Switch>
