@@ -1,28 +1,23 @@
-import React from "react";
-import { Meteor } from "meteor/meteor";
-import { withTracker } from "meteor/react-meteor-data";
-import propTypes from "prop-types";
+import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 
-export const NoteListHeader = props => {
+export const NoteListHeader = (props) => {
   return (
     <div>
-      <button
-        onClick={() => {
-          props.meteorCall("notes.insert");
-        }}
-      >
-        Create Note
-      </button>
+      <button onClick={() => {
+        props.meteorCall('notes.insert');
+      }}>Create Note</button>
     </div>
   );
 };
 
 NoteListHeader.propTypes = {
-  meteorCall: propTypes.func.isRequired
+  meteorCall: React.PropTypes.func.isRequired
 };
 
-export default withTracker(() => {
+export default createContainer(() => {
   return {
     meteorCall: Meteor.call
   };
-})(NoteListHeader);
+}, NoteListHeader);

@@ -16,11 +16,11 @@
 }
 
 .button--pill {
-  background-color: transparent;
-  border: 1px solid $button-pill-color;
-  color: $button-pill-color;
-  margin: 0 ($space / 2) 0 0;
-  padding: 0.3rem 0.8rem;
+   background-color: transparent;
+   border: 1px solid $button-pill-color;
+   color: $button-pill-color;
+   margin: 0 ($space / 2) 0 0;
+   padding: .3rem .8rem;
 }
 
 .button--secondary {

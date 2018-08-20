@@ -2,20 +2,16 @@ import { Meteor } from "meteor/meteor";
 import ReactDOM from "react-dom";
 import { Tracker } from "meteor/tracker";
 import { Session } from "meteor/session";
-import { Router, Route, Switch } from "react-router-dom";
-import createHistory from "history/createBrowserHistory";
+import { browserHistory } from "react-router";
 
-const history = createHistory();
-
-window.browserHistory = history;
-
-import { onAuthChange, routes } from "../imports/routes/routes";
-import "../imports/startup/simple-schema-config";
+import { routes, onAuthChange } from "../imports/routes/routes";
+import "../imports/startup/simple-schema-configuration.js";
 
 Tracker.autorun(() => {
   const isAuthenticated = !!Meteor.userId();
+  const currentPagePrivacy = Session.get("currentPagePrivacy");
 
-  onAuthChange(isAuthenticated);
+  onAuthChange(isAuthenticated, currentPagePrivacy);
 });
 
 Tracker.autorun(() => {

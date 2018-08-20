@@ -1,68 +1,71 @@
-import expect from "expect";
+import { Meteor } from 'meteor/meteor';
+import expect from 'expect';
 
-import { validateNewUser } from "../imports/api/users";
+import { validateNewUser } from './users';
 
-describe("users", function() {
-  it("should allow valid email address", function() {
-    const testUser = {
-      emails: [
-        {
-          address: "test@me.com"
-        }
-      ]
-    };
+if (Meteor.isServer) {
+  describe('users', function () {
 
-    const res = validateNewUser(testUser);
-    expect(res).toBe(true);
+    it('should allow valid email address', function () {
+      const testUser = {
+        emails: [
+          {
+            address: 'Test@example.com'
+          }
+        ]
+      };
+      const res = validateNewUser(testUser);
+
+      expect(res).toBe(true);
+    });
+
+    it('should reject invalid email', function () {
+      const testUser = {
+        emails: [
+          {
+            address: 'Testom'
+          }
+        ]
+      };
+
+      expect(() => {
+        validateNewUser(testUser);
+      }).toThrow();
+    });
+
   });
+}
 
-  it("should reject invalid email", function() {
-    const testUser = {
-      emails: [
-        {
-          address: "test"
-        }
-      ]
-    };
-    expect(() => {
-      validateNewUser(testUser);
-    }).toThrow();
-  });
-});
+
 
 // const add = (a, b) => {
-//   if (typeof b !== "number") {
+//   if (typeof b !== 'number') {
 //     return a + a;
 //   }
+//
 //   return a + b;
 // };
-
-// const square = a => a * a;
-
-// describe("add", function() {
-//   it("should add two numbers", function() {
-//     const res = add(9, 5);
-
-//     if (res !== 14) {
-//       throw new Error("Sum was not equal to expected value");
-//     }
+//
+// const square = (a) => a * a;
+//
+// describe('add', function () {
+//   it('should add two numbers', function () {
+//     const res = add(11, 9);
+//
+//     expect(res).toBe(20);
 //   });
-
-//   it("should double a single number", function() {
-//     const res = add(9);
-
-//     if (res !== 18) {
-//       throw new Error("Number was not doubled");
-//     }
+//
+//   it('should double a single number', function () {
+//     const res = add(44);
+//
+//     expect(res).toBe(88);
 //   });
 // });
-
-// describe("square", function() {
-//   it("should square a number", function() {
-//     const res = square(9);
-
-//     if (res !== 81) {
-//       throw new Error("Number was not square");
-//     }
+//
+// describe('square', function () {
+//   it('should square a number', function () {
+//     const res = square(11);
+//
+//     expect(res).toBe(121);
 //   });
 // });

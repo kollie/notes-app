@@ -1,6 +1,6 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 html {
@@ -22,17 +22,15 @@ h2 {
   margin-bottom: $space;
 }
 
-a {
-  color: black;
-}
-
 p {
   margin-bottom: $space;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+a {
+  color: black;
+}
+
+input[type=text], input[type=email], input[type=password] {
   border: 1px solid $input-border;
   font-size: $base-font-size;
   margin-bottom: $space;
