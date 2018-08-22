@@ -65,12 +65,12 @@ if (Meteor.isClient) {
 
       wrapper.find("textarea").simulate("change", {
         target: {
-          body: newBody
+          value: newBody
         }
       });
       expect(wrapper.state("body")).toBe(newBody);
       expect(call).toHaveBeenCalledWith("notes.update", notes[0]._id, {
-        target: newBody
+        body: newBody
       });
 
       it("should update the note title on input", function() {
@@ -86,7 +86,7 @@ if (Meteor.isClient) {
 
         wrapper.find("input").simulate("change", {
           target: {
-            title: title
+            value: title
           }
         });
         expect(wrapper.state("title")).toBe(title);
