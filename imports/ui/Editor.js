@@ -77,10 +77,10 @@ export class Editor extends React.Component {
 }
 
 Editor.propTypes = {
-  note: React.PropTypes.object,
-  selectedNoteId: React.PropTypes.string,
-  call: React.PropTypes.func.isRequired,
-  browserHistory: React.PropTypes.object.isRequired
+  note: PropTypes.object,
+  selectedNoteId: PropTypes.string,
+  call: PropTypes.func.isRequired,
+  browserHistory: PropTypes.object.isRequired
 };
 
 export default createContainer(() => {
